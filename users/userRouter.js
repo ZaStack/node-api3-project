@@ -62,15 +62,23 @@ router.delete('/:id', (req, res) => {
     const { id } = req.params;
     Users.remove(id)
         .then(user => {
+            res.status(200).json(user);
+        })
+        .catch(err => {
+            console.log(`Error: ${err}`);
+        });
+});
+
+router.put('/:id', (req, res) => {
+    const { id } = req.params;
+    const { body } = req;
+    Users.update(id, body)
+        .then(user => {
           res.status(200).json(user)
         })
         .catch(err => {
           console.log(`Error: ${err}`)
         });
-});
-
-router.put('/:id', (req, res) => {
-    // do your magic!
 });
 
 //custom middleware
